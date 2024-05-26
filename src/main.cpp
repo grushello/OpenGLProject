@@ -1,14 +1,13 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include "internal/Game.h"
 #include "internal/Resource_manager.h"
+#include "internal/Camera.h"
 
 #include <iostream>
 
 // GLFW function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 // The Width of the screen
 const unsigned int SCREEN_WIDTH = 800;
@@ -40,6 +39,7 @@ int main(int argc, char* argv[])
     }
 
     glfwSetKeyCallback(window, key_callback);
+    glfwSetScrollCallback(window, scroll_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // OpenGL configuration
@@ -103,6 +103,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         else if (action == GLFW_RELEASE)
             Sokoban.Keys[key] = false;
     }
+}
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    Sokoban.Renderer->camera.processMouseScroll(static_cast<float>(yoffset));
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

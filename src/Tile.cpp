@@ -37,8 +37,8 @@ Tile::Tile(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color)
     }
 }
 
-void Tile::Draw(SpriteRenderer& renderer)
+void Tile::draw(SpriteRenderer& renderer)
 {
-    renderer.DrawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
+    renderer.drawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
 }
 

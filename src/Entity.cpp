@@ -25,7 +25,7 @@ Entity::Entity(glm::vec2 pos, glm::vec2 size, int entity_ID, glm::vec3 color)
     }
 }
 
-void Entity::Draw(SpriteRenderer& renderer)
+void Entity::draw(SpriteRenderer& renderer)
 {
-    renderer.DrawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
+    renderer.drawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
 }

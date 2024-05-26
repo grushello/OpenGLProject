@@ -1,4 +1,9 @@
+#include <glad/glad.h>
+#include<GLFW/glfw3.h>
+
 #include<vector>
+
+#include "internal/Camera.h"
 #include<internal/GameLevel.h>
 
 enum GameState 
@@ -11,6 +16,8 @@ enum GameState
 class Game
 {
 public:
+    // active renderer
+    SpriteRenderer* Renderer;
     // game state
     GameState    State;
     bool         Keys[1024];
@@ -25,6 +32,7 @@ public:
     void Init();
     // game loop
     void ProcessInput(float dt);
+    void scrollCallback(double yoffset);
     void Update(float dt);
     void Render();
 };

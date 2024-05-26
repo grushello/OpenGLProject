@@ -8,7 +8,6 @@
 // Game-related State data
 SpriteRenderer* Renderer;
 
-
 Game::Game(unsigned int width, unsigned int height)
     : State(GAME_ACTIVE), Keys(), Width(width), Height(height)
 {
@@ -36,10 +35,13 @@ void Game::Init()
         static_cast<float>(this->Height), 0.0f, -1.0f, 1.0f);
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+
     // set render-specific controls
     Shader shader = ResourceManager::GetShader("sprite");
-    Renderer = new SpriteRenderer(shader);
+    Camera2D camera(glm::vec2(0.0f, 0.0f), 1.0f, this->Width, this->Height);
 
+    Renderer = new SpriteRenderer(shader, camera);
+    this->Renderer = Renderer;
     // load textures
     ResourceManager::LoadTexture((str_dir + "/assets/textures/default_texture.png").c_str(), true, "default_texture");
 
@@ -68,18 +70,35 @@ void Game::Update(float dt)
 
 void Game::ProcessInput(float dt)
 {
-
+    if(this->State == GAME_ACTIVE)
+    {
+        // move playerboard
+        if (this->Keys[GLFW_KEY_UP])
+        {
+            Renderer->camera.processKeyboard(UP, dt);
+        }
+        if (this->Keys[GLFW_KEY_LEFT])
+        {
+            Renderer->camera.processKeyboard(LEFT, dt);
+        }
+        if (this->Keys[GLFW_KEY_DOWN])
+        {
+            Renderer->camera.processKeyboard(DOWN, dt);
+        }
+        if (this->Keys[GLFW_KEY_RIGHT])
+        {
+            Renderer->camera.processKeyboard(RIGHT, dt);
+        }
+    }
 }
-
 void Game::Render()
 {
     if (this->State == GAME_ACTIVE)
     {
         // draw background
         Texture2D background = ResourceManager::GetTexture("background");
-        Renderer->DrawSprite(background, glm::vec2(0.0f, 0.0f), glm::vec2(this->Width, this->Height), 0.0f
-        );
+        Renderer->drawBackground(background, glm::vec2(this->Width, this->Height));
         // draw level
-        this->Levels[this->Level].Draw(*Renderer);
+        this->Levels[this->Level].draw(*Renderer);
     }
 }

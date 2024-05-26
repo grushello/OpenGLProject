@@ -38,12 +38,12 @@ void GameLevel::Load(const char *file, unsigned int levelWidth, unsigned int lev
     }
 }
 
-void GameLevel::Draw(SpriteRenderer &renderer)
+void GameLevel::draw(SpriteRenderer &renderer)
 {
     for (Tile &tile : this->tiles)
-        tile.Draw(renderer);
+        tile.draw(renderer);
     for (Entity& entity : this->entities)
-        entity.Draw(renderer);
+        entity.draw(renderer);
 }
 
 bool GameLevel::IsCompleted()

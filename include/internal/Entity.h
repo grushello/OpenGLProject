@@ -33,7 +33,7 @@ public:
 	Entity();
 	Entity(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color = glm::vec3(1.0f));
 	// draw sprite
-	virtual void Draw(SpriteRenderer& renderer);
+	virtual void draw(SpriteRenderer& renderer);
 };
 #endif
 

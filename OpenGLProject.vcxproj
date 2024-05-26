@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="external\src\glad.c" />
     <ClCompile Include="src\GameLevel.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\internal\Camera.h" />
     <ClInclude Include="include\internal\Entity.h" />
     <ClInclude Include="include\internal\GameLevel.h" />
     <ClInclude Include="include\glad\glad.h" />
