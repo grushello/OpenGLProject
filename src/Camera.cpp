@@ -16,13 +16,13 @@ glm::mat4 Camera2D::getProjectionMatrix() const
 
 void Camera2D::processKeyboard(Camera_Movement direction, float deltaTime) {
     float velocity = MovementSpeed * deltaTime;
-    if (direction == UP)
+    if (direction == CAMERA_UP)
         Position.y -= velocity;
-    if (direction == DOWN)
+    if (direction == CAMERA_DOWN)
         Position.y += velocity;
-    if (direction == LEFT)
+    if (direction == CAMERA_LEFT)
         Position.x -= velocity;
-    if (direction == RIGHT)
+    if (direction == CAMERA_RIGHT)
         Position.x += velocity;
 }
 

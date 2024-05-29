@@ -135,6 +135,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Box.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="external\src\glad.c" />
@@ -150,6 +152,7 @@
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\internal\Box.h" />
     <ClInclude Include="include\internal\Camera.h" />
     <ClInclude Include="include\internal\Entity.h" />
     <ClInclude Include="include\internal\GameLevel.h" />
@@ -451,6 +454,7 @@
     <ClInclude Include="include\internal\Resource_manager.h" />
     <ClInclude Include="include\internal\SpriteRenderer.h" />
     <ClInclude Include="include\internal\Tile.h" />
+    <ClInclude Include="include\internal\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl" />

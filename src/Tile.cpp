@@ -8,13 +8,14 @@ Tile::Tile(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color)
     : Position(pos), Size(size), Color(color), Rotation(0.0f), IsWalkable(false)
 {
     this->Sprite = ResourceManager::GetTexture("default_texture");
+    this->ID = ID;
     switch (ID)
     {
     case TILE_NONE:
         std::cerr << "Tile ID can't be equal to TILE_NONE\n";
         return;
     case TILE_GRASS:
-        this->Sprite = ResourceManager::GetTexture("tile_grass_1"); //grass has variations
+        this->Sprite = ResourceManager::GetTexture("tile_grass"); 
         this->IsWalkable = true;
         break;
     case TILE_WALL:
@@ -29,8 +30,8 @@ Tile::Tile(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color)
         this->Sprite = ResourceManager::GetTexture("tile_filled_hole");
         this->IsWalkable = true;
         break;
-    case TILE_FINISH:
-        this->Sprite = ResourceManager::GetTexture("tile_finish");
+    case TILE_GOAL:
+        this->Sprite = ResourceManager::GetTexture("tile_goal");
         this->IsWalkable = true;
     default:
         break;

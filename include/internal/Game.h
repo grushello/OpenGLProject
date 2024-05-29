@@ -1,38 +1,32 @@
-#include <glad/glad.h>
-#include<GLFW/glfw3.h>
+#ifndef GAME_H
+#define GAME_H
 
-#include<vector>
+#include "internal/Resource_Manager.h"
+#include "internal/GameLevel.h"
 
-#include "internal/Camera.h"
-#include<internal/GameLevel.h>
-
-enum GameState 
-{
-    GAME_ACTIVE,
-    GAME_MENU,
-    GAME_WIN
-};
-
+#include <vector>
 class Game
 {
 public:
-    // active renderer
+    enum GameState {
+        GAME_ACTIVE,
+        GAME_MENU,
+        GAME_WIN
+    };
     SpriteRenderer* Renderer;
-    // game state
-    GameState    State;
-    bool         Keys[1024];
+    GameState State;
+    bool Keys[1024];
     unsigned int Width, Height;
-    // levels
     std::vector<GameLevel> Levels;
-    unsigned int           Level;
-    // constructor/destructor
+    unsigned int Level;
+
     Game(unsigned int width, unsigned int height);
     ~Game();
-    // initialize game state (load all shaders/textures/levels)
+
     void Init();
-    // game loop
     void ProcessInput(float dt);
-    void scrollCallback(double yoffset);
     void Update(float dt);
     void Render();
 };
+
+#endif

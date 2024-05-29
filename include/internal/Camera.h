@@ -5,10 +5,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 enum Camera_Movement {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+    CAMERA_UP,
+    CAMERA_DOWN,
+    CAMERA_LEFT,
+    CAMERA_RIGHT
 };
 
 class Camera2D {

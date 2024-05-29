@@ -1,39 +1,34 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "internal/SpriteRenderer.h"
+#include "internal/Resource_manager.h"
+
 #include <iostream>
-
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-
-#include "internal/Texture.h"
-#include "internal/spriteRenderer.h"
-#include  "internal/Resource_manager.h"
 
 const float ENTITY_WIDTH = 64;
 const float ENTITY_HEIGHT = 64;
 
 enum EntityID
 {
-	ENTITY_NONE = 0,
-	ENTITY_PLAYER = 1,
-	ENTITY_BOX = 2,
-	ENTITY_ENEMY = 3
+    ENTITY_NONE,
+    ENTITY_BOX,
+    ENTITY_PLAYER,
+    ENTITY_ENEMY
 };
 class Entity
 {
 public:
-	int ID = 0;
-	glm::vec2   Position, Size;
-	glm::vec3   Color;
-	float       Rotation;
+    glm::vec2   Position, Size;
+    glm::vec3   Color;
+    float       Rotation;
+    Texture2D   Sprite;
 
-	Texture2D   Sprite;
-	// constructor(s)
-	Entity();
-	Entity(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color = glm::vec3(1.0f));
-	// draw sprite
-	virtual void draw(SpriteRenderer& renderer);
+    Entity(glm::vec2 pos = glm::vec2(0.0f, 0.0f), glm::vec2 size = glm::vec2(ENTITY_WIDTH, ENTITY_HEIGHT), glm::vec3 color = glm::vec3(1.0f));
+    virtual ~Entity() = default;
+
+    virtual void draw(SpriteRenderer& renderer);
+    virtual void loadTexture() = 0;
 };
-#endif
 
+#endif

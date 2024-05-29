@@ -1,0 +1,20 @@
+tile codes:
+TILE_NONE = 0,
+TILE_GRASS = 1, // grass has 3 variations, check file names when setting the texture
+TILE_WALL = 2,
+TILE_HOLE = 3,
+TILE_FILLED_HOLE = 4,
+TILE_FINISH = 5
+
+entity codes:
+ENTITY_NONE = 0,
+ENTITY_PLAYER = 1,
+ENTITY_BOX = 2,
+ENTITY_ENEMY = 3
+
+example of a level (tilemap at the top, entities map at the bottom):
+1 2 1 0 0 2 2 2 2 2 2 2 1 2 1 2
+2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1
+/
+0 1 2 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,14 +1,11 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <iostream>
-
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-
+#include <internal/SpriteRenderer.h>
 #include "internal/Texture.h"
-#include "internal/spriteRenderer.h"
 #include <internal/Resource_manager.h>
+
+#include <iostream>
 
 const float TILE_WIDTH = 64;
 const float TILE_HEIGHT = 64;
@@ -22,7 +19,7 @@ enum TileID
     TILE_WALL = 2,
     TILE_HOLE = 3,
     TILE_FILLED_HOLE = 4,
-    TILE_FINISH = 5
+    TILE_GOAL = 5
 };
 class Tile
 {
