@@ -27,7 +27,7 @@ public:
 
 private:
 
-    void init(std::vector<std::vector<unsigned int>> tileData, std::vector<std::vector<unsigned int>> entityData, unsigned int levelWidth, unsigned int levelHeight);
+    void init(std::vector<std::vector<unsigned int>>& tileData, std::vector<std::vector<unsigned int>>& entityData, unsigned int levelWidth, unsigned int levelHeight);
     void tileInit(int tile_ID, float unit_width, float unit_height, unsigned int tile_x, unsigned int tile_y);
     void entityInit(int entity_ID, float unit_width, float unit_height, unsigned int entity_x, unsigned int entity_y);
 

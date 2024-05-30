@@ -59,7 +59,7 @@ bool GameLevel::IsCompleted()
     return true;
 }
 
-void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, std::vector<std::vector<unsigned int>> entityData, unsigned int levelWidth, unsigned int levelHeight)
+void GameLevel::init(std::vector<std::vector<unsigned int>>& tileData, std::vector<std::vector<unsigned int>> &entityData, unsigned int levelWidth, unsigned int levelHeight)
 {
     unsigned int height = tileData.size();
     unsigned int width = tileData[0].size();

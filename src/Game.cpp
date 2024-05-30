@@ -135,6 +135,7 @@ void Game::ProcessInput(float dt)
         if (this->Keys[GLFW_KEY_ENTER])
         {
             this->KeysProcessed[GLFW_KEY_ENTER] = true;
+            ResetLevel();
             this->Level = (Level+1)%Levels.size();
             ResetLevel();
             this->State = GAME_MENU;
@@ -179,11 +180,19 @@ void Game::ResetLevel()
     std::string str_dir = dir.string();
 
     if (this->Level == 0)
+    {
         this->Levels[0].Load((str_dir + "/levels/lvl1.lvl").c_str(), this->Width, this->Height / 2);
+    }
     else if (this->Level == 1)
+    {
         this->Levels[1].Load((str_dir + "/levels/lvl2.lvl").c_str(), this->Width, this->Height / 2);
+    }
     else if (this->Level == 2)
+    {
         this->Levels[2].Load((str_dir + "/levels/lvl3.lvl").c_str(), this->Width, this->Height / 2);
+    }
     else if (this->Level == 3)
+    {    
         this->Levels[3].Load((str_dir + "/levels/lvl4.lvl").c_str(), this->Width, this->Height / 2);
+    }
 }
