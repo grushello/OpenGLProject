@@ -71,8 +71,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\slava\prog\Studio\projects\OpenGLProject\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;C:\slava\prog\Studio\projects\OpenGLProject\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,7 +143,6 @@
     <ClCompile Include="external\src\glad.c" />
     <ClCompile Include="src\GameLevel.cpp" />
     <ClCompile Include="include\glm\detail\glm.cpp" />
-    <ClCompile Include="include\glm\glm.cppm" />
     <ClCompile Include="src\SpriteRenderer.cpp" />
     <ClCompile Include="src\Resource_manager.cpp" />
     <ClCompile Include="src\Shader.cpp" />

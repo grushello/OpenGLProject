@@ -33,9 +33,6 @@
     <ClCompile Include="include\glm\detail\glm.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="include\glm\glm.cppm">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\Resource_manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
