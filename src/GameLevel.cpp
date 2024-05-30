@@ -5,12 +5,10 @@
 
 void GameLevel::Load(const char* file, unsigned int levelWidth, unsigned int levelHeight)
 {
-    // clear old data
     this->tiles.clear();
     this->entities.clear();
     this->player = nullptr;
 
-    // load from file
     unsigned int tileCode, entityCode;
     std::string line;
     std::ifstream fstream(file);
@@ -18,7 +16,7 @@ void GameLevel::Load(const char* file, unsigned int levelWidth, unsigned int lev
     std::vector<std::vector<unsigned int>> entityData;
     if (fstream)
     {
-        while (std::getline(fstream, line) && line != "/") // read each line from level file
+        while (std::getline(fstream, line) && line != "/") // read each line from level file (tiles)
         {
             std::istringstream sstream(line);
             std::vector<unsigned int> row;
@@ -26,7 +24,7 @@ void GameLevel::Load(const char* file, unsigned int levelWidth, unsigned int lev
                 row.push_back(tileCode);
             tileData.push_back(row);
         }
-        while (std::getline(fstream, line)) // read each line from level file
+        while (std::getline(fstream, line)) // read each line from level file (entities)
         {
             std::istringstream sstream(line);
             std::vector<unsigned int> row;
@@ -103,18 +101,18 @@ void GameLevel::entityInit(int entity_ID, float unit_width, float unit_height, u
     glm::vec2 size(unit_width, unit_height);
     glm::vec3 color(1.0f, 1.0f, 1.0f);
 
-    Player* player = nullptr; // Инициализируем указатели значениями по умолчанию
+    Player* player = nullptr;
     Box* box = nullptr;
 
     switch (entity_ID)
     {
     case ENTITY_PLAYER:
-        player = new Player(pos, size, color); // Используем уже объявленную переменную player
+        player = new Player(pos, size, color);
         this->player = player;
         this->entities.push_back(player);
         break;
     case ENTITY_BOX:
-        box = new Box(pos, size, color); // Используем уже объявленную переменную box
+        box = new Box(pos, size, color);
         entities.push_back(box);
         break;
     case ENTITY_ENEMY:
@@ -212,33 +210,28 @@ bool GameLevel::MoveBox(Box* box, glm::vec2 direction)
     if (tile->ID == TILE_HOLE)
     {
         FillHole(box, tile);
-        return true; // Возвращаем true, так как ящик был успешно перемещен на заполненное отверстие
+        return true;
     }
     if (IsValidBoxMove(newBoxPosition) && !GetEntityAtPosition(newBoxPosition))
     {
         box->Position = newBoxPosition;
-        return true; // Возвращаем true, так как ящик был успешно перемещен
+        return true;
     }
-    return false; // Возвращаем false, если ящик не может быть перемещен в заданном направлении
+    return false;
 }
 
 void GameLevel::FillHole(Box* box, Tile* hole)
 {
-    // Удаляем ящик из списка сущностей
     auto itBox = std::find(entities.begin(), entities.end(), box);
     if (itBox != entities.end())
     {
         entities.erase(itBox);
     }
-
-    // Удаляем ящик из памяти
     delete box;
 
-    // Находим индекс ямы в списке тайлов
     auto itHole = std::find(tiles.begin(), tiles.end(), hole);
     if (itHole != tiles.end())
     {
-        // Заменяем текущий тайл ямы на заполненный тайл
         *itHole = new Tile(hole->Position, glm::vec2(TILE_WIDTH, TILE_HEIGHT), TILE_FILLED_HOLE);
     }
 }

@@ -7,7 +7,7 @@
 #include "internal/SpriteRenderer.h"
 #include "internal/Player.h"
 #include "internal/Box.h"
-
+#include <internal/TextRenderer.h>
 #include <vector>
 class GameLevel
 {
