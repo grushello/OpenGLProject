@@ -19,7 +19,9 @@ enum TileID
     TILE_WALL = 2,
     TILE_HOLE = 3,
     TILE_FILLED_HOLE = 4,
-    TILE_GOAL = 5
+    TILE_GOAL = 5,
+    TILE_BIG_HOLE = 6,
+    TILE_HALF_FILLED_HOLE = 7
 };
 class Tile
 {
