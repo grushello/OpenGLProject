@@ -8,13 +8,16 @@ public:
     {
         GAME_ACTIVE,
         GAME_MENU,
-        GAME_WIN
+        GAME_WIN,
+        GAME_FINISHED
     };
 
 private:
 	unsigned int LevelsPassed = 0;
 	unsigned int CurrentLevel = 0;
 	unsigned int TilesTraveled = 0;
+    unsigned int BoxesMoved = 0;
+    unsigned int HolesFilled = 0;
 	GameState gameState = GAME_ACTIVE;
 public:
 
@@ -26,6 +29,12 @@ public:
 
     int getTilesTraveled() const;
     void setTilesTraveled(int newValue);
+
+    int getBoxesMoved() const;
+    void setBoxesMoved(int newValue);
+
+    int getHolesFilled() const;
+    void setHolesFilled(int newValue);
 
     int getCurrentLevel() const;
     void setCurrentLevel(int newValue);

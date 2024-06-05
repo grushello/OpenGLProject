@@ -14,6 +14,26 @@ void GameData::setTilesTraveled(int newValue)
     this->TilesTraveled = newValue;
 }
 
+int GameData::getBoxesMoved() const
+{
+    return this->BoxesMoved;
+}
+
+void GameData::setBoxesMoved(int newValue)
+{
+    this->BoxesMoved = newValue;
+}
+
+int GameData::getHolesFilled() const
+{
+    return this->HolesFilled;
+}
+
+void GameData::setHolesFilled(int newValue)
+{
+    this->HolesFilled = newValue;
+}
+
 int GameData::getCurrentLevel() const
 {
     return this->CurrentLevel;
@@ -56,14 +76,16 @@ void GameData::Save() const
     }
     file << "LevelsPassed: " << LevelsPassed << "\n";
     file << "CurrentLevel: " << CurrentLevel << "\n";
-    file << "TilesTraveled: " << TilesTraveled;
+    file << "TilesTraveled: " << TilesTraveled << "\n";
+    file << "BoxesMoved: " << BoxesMoved << "\n";
+    file << "HolesFilled: " << HolesFilled;
     file.close();
 }
 
 void GameData::DeleteSave()
 {
     std::filesystem::path filePath(__FILE__);
-    filePath = filePath.parent_path().parent_path() / "saves/save.sv";
+    filePath = filePath.parent_path().parent_path() / "saves" / "save.sv";
 
     if (std::filesystem::exists(filePath))
     {
@@ -109,6 +131,14 @@ void GameData::LoadSave()
             else if (key == "TilesTraveled:")
             {
                 TilesTraveled = value;
+            }
+            else if (key == "BoxesMoved:")
+            {
+                BoxesMoved = value;
+            }
+            else if (key == "HolesFilled:")
+            {
+                HolesFilled = value;
             }
         }
         inFile.close();

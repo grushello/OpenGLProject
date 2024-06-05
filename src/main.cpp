@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     if (key == GLFW_KEY_ESCAPE 
-        && key == GLFW_PRESS 
+        && action == GLFW_PRESS 
         && Sokoban.gameData.getGameState() == Sokoban.gameData.GAME_MENU)
         glfwSetWindowShouldClose(window, true);
     if (key >= 0 && key < 1024)

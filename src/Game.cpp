@@ -71,18 +71,22 @@ void Game::ProcessInput(float dt)
         if (this->Keys[GLFW_KEY_UP])
         {
             Renderer->camera.processKeyboard(CAMERA_UP, dt);
+            KeysProcessed[GLFW_KEY_UP] = true;
         }
         if (this->Keys[GLFW_KEY_LEFT])
         {
             Renderer->camera.processKeyboard(CAMERA_LEFT, dt);
+            KeysProcessed[GLFW_KEY_LEFT] = true;
         }
         if (this->Keys[GLFW_KEY_DOWN])
         {
             Renderer->camera.processKeyboard(CAMERA_DOWN, dt);
+            KeysProcessed[GLFW_KEY_DOWN] = true;
         }
         if (this->Keys[GLFW_KEY_RIGHT])
         {
             Renderer->camera.processKeyboard(CAMERA_RIGHT, dt);
+            KeysProcessed[GLFW_KEY_RIGHT] = true;
         }
     }
     if (this->gameData.getGameState() == gameData.GAME_ACTIVE)
@@ -125,7 +129,7 @@ void Game::ProcessInput(float dt)
         if (this->Keys[GLFW_KEY_R] && !KeysProcessed[GLFW_KEY_R])
         {
             this->ResetLevel();
-            KeysProcessed[GLFW_KEY_ESCAPE] = true;
+            KeysProcessed[GLFW_KEY_R] = true;
         }
     }
 
@@ -152,13 +156,6 @@ void Game::ProcessInput(float dt)
     }
     if (this->gameData.getGameState() == gameData.GAME_WIN)
     {
-        if (gameData.getCurrentLevel() == this->Levels.size() - 1)
-        {
-            Text->RenderText("Tiles traveled: " + this->gameData.getTilesTraveled(), 0.0f, Height - 10, 1.0f);
-        }
-        if(gameData.getCurrentLevel() == gameData.getLevelsPassed())
-            gameData.setLevelsPassed(gameData.getLevelsPassed() + 1);
-        gameData.Save();
         if (this->Keys[GLFW_KEY_ENTER])
         {
             this->KeysProcessed[GLFW_KEY_ENTER] = true;
@@ -168,18 +165,57 @@ void Game::ProcessInput(float dt)
             this->gameData.setGameState(gameData.GAME_MENU);
         }
     }
+    if (this->gameData.getGameState() == gameData.GAME_FINISHED)
+    {
+        if (this->Keys[GLFW_KEY_ENTER] && !this->KeysProcessed[GLFW_KEY_ENTER])
+        {
+            ResetLevel();
+            this->gameData.setGameState(gameData.GAME_MENU);
+            this->KeysProcessed[GLFW_KEY_ENTER] = true;
+        }
+        else if (this->Keys[GLFW_KEY_BACKSPACE] && !this->KeysProcessed[GLFW_KEY_BACKSPACE])
+        {
+            this->gameData.setGameState(gameData.GAME_MENU);
+            gameData.DeleteSave();
+            this->Load();
+            this->KeysProcessed[GLFW_KEY_BACKSPACE] = true;
+        }
+    }
 }
 void Game::Update(float dt)
 {
-    if (this->gameData.getGameState() == gameData.GAME_ACTIVE 
+    if (this->gameData.getGameState() == gameData.GAME_ACTIVE
+        && this->Levels[this->gameData.getCurrentLevel()].IsCompleted()
+        && gameData.getCurrentLevel() == this->Levels.size() - 1)
+    {
+        this->gameData.setGameState(gameData.GAME_FINISHED);
+        gameData.Save();
+    }
+    else if (this->gameData.getGameState() == gameData.GAME_ACTIVE 
         && this->Levels[this->gameData.getCurrentLevel()].IsCompleted())
     {
         this->gameData.setGameState(gameData.GAME_WIN);
+        if (gameData.getCurrentLevel() == gameData.getLevelsPassed())
+            gameData.setLevelsPassed(gameData.getLevelsPassed() + 1);
+        gameData.Save();
     }
 }
 
 void Game::Render()
 {
+    if (this->gameData.getGameState() == gameData.GAME_FINISHED)
+    {
+        Texture2D tex = ResourceManager::GetTexture("background");
+        Renderer->drawBackground(tex, glm::vec2(this->Width, this->Height));
+
+        Text->RenderText("You have finished the game!!! ", 95.0f, Height / 2 - 40.0f, 1.5f, glm::vec3(1.0f, 1.0f, 0.0f));
+        Text->RenderText("Press ENTER to return back to levels", 95.0f, Height / 2, 0.75f);
+        Text->RenderText("Press BACKSPACE to start from the beginning", 95.0f, Height / 2 + 20.0f, 0.75f);
+        Text->RenderText("Here are some of your stats:", 95.0f, Height / 2 + 55.0f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        Text->RenderText("Tiles Traveled: " + std::to_string(gameData.getTilesTraveled()), 95.0f, Height / 2 + 80.0f, 0.75f);
+        Text->RenderText("Boxes Moved: " + std::to_string(gameData.getBoxesMoved()), 95.0f, Height / 2 + 100.0f, 0.75f);
+        Text->RenderText("Holes Filled: " + std::to_string(gameData.getHolesFilled()), 95.0f, Height / 2 + 120.0f, 0.75f);
+    }
     if (this->gameData.getGameState() == gameData.GAME_ACTIVE 
         || this->gameData.getGameState() == gameData.GAME_MENU 
         || this->gameData.getGameState() == gameData.GAME_WIN)
@@ -187,8 +223,6 @@ void Game::Render()
         Texture2D tex = ResourceManager::GetTexture("background");
         Renderer->drawBackground(tex, glm::vec2(this->Width, this->Height));
         this->Levels[this->gameData.getCurrentLevel()].Draw(*Renderer);
-
-        Text->RenderText("Tiles traveled: " + this->gameData.getTilesTraveled(), 0.0f, 10, 1.0f);
     }
     if (this->gameData.getGameState() == gameData.GAME_MENU)
     {

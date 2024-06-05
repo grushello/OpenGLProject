@@ -1,5 +1,5 @@
 #include "internal/GameLogic.h"
-
+#include "internal/GameData.h"
 #include <vector>
 
 bool GameLogic::IsCompleted(GameLevel* gameLevel)
@@ -18,6 +18,7 @@ bool GameLogic::IsCompleted(GameLevel* gameLevel)
 
 void GameLogic::ProcessGameLogic(PlayerActions action, GameLevel* gameLevel)
 {
+    GameData& gameData = GameData::getInstance();
     if (!gameLevel->player)
         return;
 
@@ -52,8 +53,13 @@ void GameLogic::ProcessGameLogic(PlayerActions action, GameLevel* gameLevel)
             if (MoveBox(box, direction, gameLevel))
             {
                 gameLevel->player->Position = newPosition;
+                gameData.setBoxesMoved(gameData.getBoxesMoved() + 1);
             }
         }
+    }
+    if (newPosition == gameLevel->player->Position)
+    {
+        gameData.setTilesTraveled(gameData.getTilesTraveled() + 1);
     }
 }
 
@@ -84,6 +90,7 @@ bool GameLogic::MoveBox(Box* box, glm::vec2 direction, GameLevel* gameLevel)
 
 void GameLogic::FillHole(Box* box, Tile* hole, GameLevel* gameLevel)
 {
+    GameData& gameData = GameData::getInstance();
     auto itBox = std::find(gameLevel->entities.begin(), gameLevel->entities.end(), box);
     if (itBox != gameLevel->entities.end())
     {
@@ -96,6 +103,7 @@ void GameLogic::FillHole(Box* box, Tile* hole, GameLevel* gameLevel)
     {
         *itHole = new Tile(hole->Position, glm::vec2(TILE_WIDTH, TILE_HEIGHT), TILE_FILLED_HOLE);
     }
+    gameData.setHolesFilled(gameData.getHolesFilled() + 1);
 }
 
 void GameLogic::FillBigHole(Box* box, Tile* bigHole, GameLevel* gameLevel)
