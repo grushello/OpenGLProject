@@ -2,7 +2,7 @@
 #define GAMELOGIC_H
 
 #include<internal/Player.h>
-#include<internal/tile.h>
+#include<internal/Tile.h>
 #include<internal/GameLevel.h>
 
 class GameLogic

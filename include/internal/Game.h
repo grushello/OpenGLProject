@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "internal/Resource_Manager.h"
+#include "internal/Resource_manager.h"
 #include "internal/GameLevel.h"
 #include "internal/GameData.h"
 #include <vector>

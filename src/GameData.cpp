@@ -66,7 +66,15 @@ void GameData::setGameState(GameData::GameState newValue)
 void GameData::Save() const
 {
     std::filesystem::path filePath(__FILE__);
-    filePath = filePath.parent_path().parent_path() / "saves/save.sv";
+    filePath = filePath.parent_path().parent_path() / "saves";
+    if (!std::filesystem::exists(filePath)) 
+    {
+        if (!std::filesystem::create_directories(filePath)) 
+        {
+            std::cerr << "Failed to create directory: " << filePath << std::endl;
+        }
+    }
+    filePath /= "save.sv";
 
     std::ofstream file(filePath.string(), std::ios::out);
     if (!file)
