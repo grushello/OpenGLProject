@@ -156,5 +156,7 @@ void GameData::LoadSave()
         CurrentLevel = 0;
         LevelsPassed = 0;
         TilesTraveled = 0;
+        BoxesMoved = 0;
+        HolesFilled = 0;
     }
 }

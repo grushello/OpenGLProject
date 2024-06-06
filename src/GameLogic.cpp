@@ -80,6 +80,11 @@ bool GameLogic::MoveBox(Box* box, glm::vec2 direction, GameLevel* gameLevel)
         FillHole(box, tile, gameLevel);
         return true;
     }
+    else if (tile->ID == TILE_BIG_HOLE)
+    {
+        FillBigHole(box, tile, gameLevel);
+        return true;
+    }
     if (IsValidMove(newBoxPosition, gameLevel) && !GetEntityAtPosition(newBoxPosition, gameLevel))
     {
         box->Position = newBoxPosition;
@@ -118,7 +123,7 @@ void GameLogic::FillBigHole(Box* box, Tile* bigHole, GameLevel* gameLevel)
     auto itHole = std::find(gameLevel->tiles.begin(), gameLevel->tiles.end(), bigHole);
     if (itHole != gameLevel->tiles.end())
     {
-        *itHole = new Tile(bigHole->Position, glm::vec2(TILE_WIDTH, TILE_HEIGHT), TILE_HALF_FILLED_HOLE);
+        *itHole = new Tile(bigHole->Position, glm::vec2(TILE_WIDTH, TILE_HEIGHT), TILE_HOLE);
     }
 }
 

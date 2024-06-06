@@ -44,6 +44,7 @@ void Game::Load()
     ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_grass_1.png").c_str(), true, "tile_grass");
     ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_wall.png").c_str(), true, "tile_wall");
     ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_hole.png").c_str(), true, "tile_hole");
+    ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_big_hole.png").c_str(), true, "tile_big_hole");
     ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_filled_hole.png").c_str(), true, "tile_filled_hole");
     ResourceManager::LoadTexture((str_dir + "/assets/textures/tile_goal.png").c_str(), true, "tile_goal");
     ResourceManager::LoadTexture((str_dir + "/assets/textures/entity_player.png").c_str(), true, "entity_player");
@@ -54,11 +55,13 @@ void Game::Load()
     GameLevel lvl1;
     GameLevel lvl2;
     GameLevel lvl3;
+    GameLevel lvl4;
     lvl0.Load((str_dir + "/levels/lvl0.lvl").c_str(), this->Width, this->Height);
     lvl1.Load((str_dir + "/levels/lvl1.lvl").c_str(), this->Width, this->Height);
     lvl2.Load((str_dir + "/levels/lvl2.lvl").c_str(), this->Width, this->Height);
     lvl3.Load((str_dir + "/levels/lvl3.lvl").c_str(), this->Width, this->Height);
-    this->Levels = { lvl0, lvl1, lvl2, lvl3 };
+    lvl4.Load((str_dir + "/levels/lvl4.lvl").c_str(), this->Width, this->Height);
+    this->Levels = { lvl0, lvl1, lvl2, lvl3, lvl4 };
     this->gameData.LoadSave();
 }
 
@@ -260,5 +263,9 @@ void Game::ResetLevel()
     else if (this->gameData.getCurrentLevel()== 3)
     {    
         this->Levels[3].Load((str_dir + "/levels/lvl3.lvl").c_str(), this->Width, this->Height / 2);
+    }
+    else if (this->gameData.getCurrentLevel() == 4)
+    {
+        this->Levels[4].Load((str_dir + "/levels/lvl4.lvl").c_str(), this->Width, this->Height / 2);
     }
 }

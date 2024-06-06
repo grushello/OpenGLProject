@@ -31,11 +31,7 @@ Tile::Tile(glm::vec2 pos, glm::vec2 size, int ID, glm::vec3 color)
         this->IsWalkable = true;
         break;
     case TILE_BIG_HOLE:
-        this->Sprite = ResourceManager::GetTexture("tile_hole");
-        this->IsWalkable = false;
-        break;
-    case TILE_HALF_FILLED_HOLE:
-        this->Sprite = ResourceManager::GetTexture("tile_hole");
+        this->Sprite = ResourceManager::GetTexture("tile_big_hole");
         this->IsWalkable = false;
         break;
     case TILE_GOAL:

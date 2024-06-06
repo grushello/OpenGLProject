@@ -20,6 +20,10 @@ int main(int argc, char* argv[])
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // defining the version of OpenGL that will be used
     glfwWindowHint(GLFW_RESIZABLE, false); //making window non-resizable
 
+    #ifdef __APPLE__
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    #endif
+
     GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Sokoban", nullptr, nullptr);// creating a window
     glfwMakeContextCurrent(window); //telling openGL that it has to work with the newly created indow
 
@@ -78,7 +82,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (key == GLFW_KEY_ESCAPE 
         && action == GLFW_PRESS 
-        && Sokoban.gameData.getGameState() == Sokoban.gameData.GAME_MENU)
+        && Sokoban.gameData.getGameState() != Sokoban.gameData.GAME_ACTIVE)
         glfwSetWindowShouldClose(window, true);
     if (key >= 0 && key < 1024)
     {

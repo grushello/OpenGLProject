@@ -15,13 +15,12 @@ const float TILE_HEIGHT = 64;
 enum TileID
 {
     TILE_NONE = 0,
-    TILE_GRASS = 1, // grass has 3 variations, check file names when setting the texture
+    TILE_GRASS = 1, //todo: add variations to grass tile
     TILE_WALL = 2,
     TILE_HOLE = 3,
     TILE_FILLED_HOLE = 4,
     TILE_GOAL = 5,
     TILE_BIG_HOLE = 6,
-    TILE_HALF_FILLED_HOLE = 7
 };
 class Tile
 {
