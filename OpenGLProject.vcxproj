@@ -71,9 +71,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;C:\slava\prog\Studio\projects\OpenGLProject\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>.\external\libs;.\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\external\libs;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>.\external\libs;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\slava\prog\Studio\projects\OpenGLProject\external\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\external\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -136,6 +136,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameLogic.cpp" />
+    <ClCompile Include="src\GameData.cpp" />
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Camera.cpp" />
@@ -153,6 +155,8 @@
     <ClCompile Include="src\TextRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\internal\GameLogic.h" />
+    <ClInclude Include="include\internal\GameData.h" />
     <ClInclude Include="include\freetype\config\ftconfig.h" />
     <ClInclude Include="include\freetype\config\ftheader.h" />
     <ClInclude Include="include\freetype\config\ftmodule.h" />
